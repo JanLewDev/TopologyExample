@@ -1,6 +1,7 @@
 import { TopologyNode } from "@topology-foundation/node";
 import { Chat, IChat } from "./objects/chat";
 import { GSet } from "@topology-foundation/crdt";
+import { handleChatMessages } from "./handlers";
 
 const node = new TopologyNode();
 // CRO = Conflict-free Replicated Object
@@ -45,7 +46,7 @@ const render = () => {
 }
 
 async function sendMessage(message: string) {
-    let timestamp: number = Date.now();
+    let timestamp: string = Date.now().toString();
     chatCRO.addMessage(timestamp, message, node.getPeerId());
     render();
 
@@ -56,6 +57,36 @@ async function main() {
     await node.start();
 
     node.addCustomGroupMessageHandler((e) => {
-        
+        handleChatMessages(chatCRO, e);
+        peers = node.getPeers();
+        discoveryPeers = node.getPeersPerGroup("topology::discovery");
+        if(chatCRO) objectPeers = node.getPeersPerGroup(chatCRO.getObjectId());
+        render();
     })
+
+    let button_create = <HTMLButtonElement>document.getElementById("create");
+    button_create.addEventListener("click", () => {
+        chatCRO = new Chat(node.getPeerId());
+        node.createObject(chatCRO);
+        (<HTMLButtonElement>document.getElementById("chatId")).innerHTML = chatCRO.getObjectId();
+        render();
+    });
+
+    let button_connect = <HTMLButtonElement>document.getElementById("joinRoom");
+    button_connect.addEventListener("click", async () => {
+        let objectId = (<HTMLInputElement>document.getElementById("roomInput")).value;
+        try {
+            await node.subscribeObject(objectId, true);
+
+            let object: any = node.getObject(objectId);
+            
+            chatCRO = Object.assign(new Chat(node.getPeerId()), object);
+            (<HTMLButtonElement>document.getElementById("chatId")).innerHTML = objectId;
+            render();
+        } catch (e) {
+            console.error("Error while connecting to the CRO ", objectId, e);
+        }
+    });
 }
+
+main();

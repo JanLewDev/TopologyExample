@@ -3,7 +3,7 @@ import { GSet } from "@topology-foundation/crdt";
 
 export interface IChat extends TopologyObject {
     chat: GSet<string>;
-    addMessage(timestamp: number, message: string, node_id: string): void;
+    addMessage(timestamp: string, message: string, node_id: string): void;
     merge(other: Chat): void;
 }
 
@@ -16,7 +16,7 @@ export class Chat extends TopologyObject implements IChat {
         this.chat = new GSet<string>(new Set());
     }
 
-    addMessage(timestamp: number, message: string, node_id: string): void {
+    addMessage(timestamp: string, message: string, node_id: string): void {
         this.chat.add(`(${timestamp}, ${message}, ${node_id})`);
     }
 

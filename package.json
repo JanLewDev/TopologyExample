@@ -11,6 +11,10 @@
     "@topology-foundation/network": "^0.0.22-2",
     "@topology-foundation/node": "^0.0.22-2",
     "@topology-foundation/object": "^0.0.22-2",
-    "ts-node": "^10.9.2"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "scripts": {
+    "build": "tsc -b"
   }
 }
