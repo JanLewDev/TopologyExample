@@ -1,0 +1,16 @@
+{
+  "name": "topology-example",
+  "version": "1.0.0",
+  "description": "Topology Protocol Exmaple",
+  "main": "src/index.ts",
+  "repository": "https://github.com/JanLewDev/TopologyExample.git",
+  "author": "Jan Lewandowski",
+  "license": "MIT",
+  "dependencies": {
+    "@topology-foundation/crdt": "^0.0.22-2",
+    "@topology-foundation/network": "^0.0.22-2",
+    "@topology-foundation/node": "^0.0.22-2",
+    "@topology-foundation/object": "^0.0.22-2",
+    "ts-node": "^10.9.2"
+  }
+}

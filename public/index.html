@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Topology - Chat</title>
+  </head>
+  <body>
+    <div>
+      <p>Connected to <span id="chatId"></span></p>
+      <p>peers<span id="peers"></span></p>
+      <p>discovery_peers: <span id="discovery_peers"></span></p>
+      <p>object_peers: <span id="object_peers"></span></p>
+
+      <input id="roomInput" type="text" placeholder="Room ID" />
+      <button id="createRoom">Create Room</button>
+      <button id="joinRoom">Join Room</button>
+    </div>
+
+    <div id="chat">
+      <!-- Messages will appear here -->
+    </div>
+
+    <div>
+      <input id="messageInput" type="text" placeholder="Message" />
+      <button id="sendMessage">Send</button>
+    </div>
+
+    <script src="dist/index.js"></script>
+  </body>
+</html>
