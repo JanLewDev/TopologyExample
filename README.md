@@ -4,4 +4,4 @@ I want to create a chat system where a user can create or connect to a chat room
 
 ## Specifics
 
-I will create a Message class which extends TopologyObject, which will include a timestamp, the message content and the senderId. Then, a Chat class which also extends TopologyObject and having Gset\<Message> as an attribute to store the list of messages.
+Messages will be represented as a string in the format (timestamp, content, senderId). I will create a Chat class which extends TopologyObject and has Gset\<string> as an attribute to store the list of messages.
