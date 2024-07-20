@@ -7,8 +7,10 @@
   </head>
   <body>
     <div>
+      <h1>Topology Protocol - Chat</h1>
+      <p>Current peer ID <span id="peerId"></span></p>
       <p>Connected to <span id="chatId"></span></p>
-      <p>peers<span id="peers"></span></p>
+      <p>peers: <span id="peers"></span></p>
       <p>discovery_peers: <span id="discovery_peers"></span></p>
       <p>object_peers: <span id="object_peers"></span></p>
 
@@ -17,7 +19,7 @@
       <button id="joinRoom">Join Room</button>
     </div>
 
-    <div id="chat">
+    <div id="chat" style="overflow-y: scroll; height: 600px; width: 100%">
       <!-- Messages will appear here -->
     </div>
 
@@ -26,6 +28,6 @@
       <button id="sendMessage">Send</button>
     </div>
 
-    <script src="dist/index.js"></script>
+    <script src="./static/bundle/script.js"></script>
   </body>
 </html>

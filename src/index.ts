@@ -23,6 +23,9 @@ function sort(set: Set<string>): Set<string> {
 };
 
 const render = () => {
+    const element_peerId = <HTMLDivElement>document.getElementById("peerId");
+    element_peerId.innerHTML = node.getPeerId();
+
     const element_peers = <HTMLDivElement>document.getElementById("peers");
     element_peers.innerHTML = "[" + peers.join(", ") + "]";
 
@@ -55,7 +58,8 @@ async function sendMessage(message: string) {
 
 async function main() {
     await node.start();
-
+    render();
+    
     node.addCustomGroupMessageHandler((e) => {
         handleChatMessages(chatCRO, e);
         peers = node.getPeers();
@@ -86,6 +90,12 @@ async function main() {
         } catch (e) {
             console.error("Error while connecting to the CRO ", objectId, e);
         }
+    });
+
+    let button_send = <HTMLButtonElement>document.getElementById("sendMessage");
+    button_send.addEventListener("click", () => {
+        let message = (<HTMLInputElement>document.getElementById("messageInput")).value;
+        sendMessage(message);
     });
 }
 
