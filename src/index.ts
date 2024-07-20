@@ -40,6 +40,7 @@ const render = () => {
     const element_chat = <HTMLDivElement>document.getElementById("chat");
     element_chat.innerHTML = "";
 
+    if(Object.keys(chat.set).length == 0) return;
     chat.set.prototype.values().sort().forEach((message: string) => {
         const div = document.createElement("div");
         div.innerHTML = message;
@@ -50,16 +51,21 @@ const render = () => {
 
 async function sendMessage(message: string) {
     let timestamp: string = Date.now().toString();
+    if(!chatCRO) {
+        console.error("Chat CRO not initialized");
+        return;
+    }
+    console.log("Sending message: ", `(${timestamp}, ${message}, ${node.getPeerId()})`);
     chatCRO.addMessage(timestamp, message, node.getPeerId());
-    render();
 
     node.updateObject(chatCRO, `addMessage(${timestamp}, ${message}, ${node.getPeerId()})`);
+    render();
 }
 
 async function main() {
     await node.start();
     render();
-    
+
     node.addCustomGroupMessageHandler((e) => {
         handleChatMessages(chatCRO, e);
         peers = node.getPeers();
@@ -68,7 +74,7 @@ async function main() {
         render();
     })
 
-    let button_create = <HTMLButtonElement>document.getElementById("create");
+    let button_create = <HTMLButtonElement>document.getElementById("createRoom");
     button_create.addEventListener("click", () => {
         chatCRO = new Chat(node.getPeerId());
         node.createObject(chatCRO);
@@ -94,7 +100,11 @@ async function main() {
 
     let button_send = <HTMLButtonElement>document.getElementById("sendMessage");
     button_send.addEventListener("click", () => {
-        let message = (<HTMLInputElement>document.getElementById("messageInput")).value;
+        let message: string = (<HTMLInputElement>document.getElementById("messageInput")).value;
+        if(!message){
+            console.error("Tried sending an empty message");
+            return;
+        }
         sendMessage(message);
     });
 }

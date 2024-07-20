@@ -3,7 +3,7 @@ const webpack = require("webpack");
 const fs = require("fs");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: path.resolve(__dirname, "./src/index.ts"),
   devServer: {
     allowedHosts: "all",
