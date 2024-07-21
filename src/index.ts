@@ -79,7 +79,13 @@ async function main() {
 
     let button_connect = <HTMLButtonElement>document.getElementById("joinRoom");
     button_connect.addEventListener("click", async () => {
-        let objectId = (<HTMLInputElement>document.getElementById("roomInput")).value;
+        let input: HTMLInputElement = <HTMLInputElement>document.getElementById("roomInput");
+        let objectId = input.value;
+        input.value = "";
+        if(!objectId){
+            alert("Please enter a room id");
+            return;
+        }
         try {
             await node.subscribeObject(objectId, true);
 
@@ -95,7 +101,9 @@ async function main() {
 
     let button_send = <HTMLButtonElement>document.getElementById("sendMessage");
     button_send.addEventListener("click", async () => {
-        let message: string = (<HTMLInputElement>document.getElementById("messageInput")).value;
+        let input: HTMLInputElement = <HTMLInputElement>document.getElementById("messageInput");
+        let message: string = input.value;
+        input.value = "";
         if(!message){
             console.error("Tried sending an empty message");
             alert("Please enter a message");
