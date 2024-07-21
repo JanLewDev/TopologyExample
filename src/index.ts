@@ -1,6 +1,5 @@
 import { TopologyNode } from "@topology-foundation/node";
 import { Chat, IChat } from "./objects/chat";
-import { GSet } from "@topology-foundation/crdt";
 import { handleChatMessages } from "./handlers";
 
 const node = new TopologyNode();
@@ -9,18 +8,6 @@ let chatCRO: IChat;
 let peers: string[] = [];
 let discoveryPeers: string[] = [];
 let objectPeers: string[] = [];
-
-function sort(set: Set<string>): Set<string> {
-    const entries: string[] = [];
-    for (const member of set) {
-        entries.push(member);
-    }
-    set.clear();
-    for (const entry of entries.sort()) {
-        set.add(entry);
-    }
-    return set;
-};
 
 const render = () => {
     const element_peerId = <HTMLDivElement>document.getElementById("peerId");
@@ -36,14 +23,21 @@ const render = () => {
     element_objectPeers.innerHTML = "[" + objectPeers.join(", ") + "]";
 
     if(!chatCRO) return;
-    const chat = chatCRO.chat;
+    const chat = chatCRO.getMessages();
     const element_chat = <HTMLDivElement>document.getElementById("chat");
     element_chat.innerHTML = "";
 
-    if(Object.keys(chat.set).length == 0) return;
-    chat.set.prototype.values().sort().forEach((message: string) => {
+    if(chat.set.length == 0){
+        const div = document.createElement("div");
+        div.innerHTML = "No messages yet";
+        div.style.padding = "10px";
+        element_chat.appendChild(div);
+        return;
+    }
+    Array.from(chat.set()).sort().forEach((message: string) => {
         const div = document.createElement("div");
         div.innerHTML = message;
+        div.style.padding = "10px";
         element_chat.appendChild(div);
     });
 
@@ -53,6 +47,7 @@ async function sendMessage(message: string) {
     let timestamp: string = Date.now().toString();
     if(!chatCRO) {
         console.error("Chat CRO not initialized");
+        alert("Please create or join a chat room first");
         return;
     }
     console.log("Sending message: ", `(${timestamp}, ${message}, ${node.getPeerId()})`);
@@ -72,7 +67,7 @@ async function main() {
         discoveryPeers = node.getPeersPerGroup("topology::discovery");
         if(chatCRO) objectPeers = node.getPeersPerGroup(chatCRO.getObjectId());
         render();
-    })
+    });
 
     let button_create = <HTMLButtonElement>document.getElementById("createRoom");
     button_create.addEventListener("click", () => {
@@ -99,13 +94,14 @@ async function main() {
     });
 
     let button_send = <HTMLButtonElement>document.getElementById("sendMessage");
-    button_send.addEventListener("click", () => {
+    button_send.addEventListener("click", async () => {
         let message: string = (<HTMLInputElement>document.getElementById("messageInput")).value;
         if(!message){
             console.error("Tried sending an empty message");
+            alert("Please enter a message");
             return;
         }
-        sendMessage(message);
+        await sendMessage(message);
     });
 }
 
