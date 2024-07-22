@@ -110,6 +110,8 @@ async function main() {
             return;
         }
         await sendMessage(message);
+        const element_chat = <HTMLDivElement>document.getElementById("chat");
+        element_chat.scrollTop = element_chat.scrollHeight;
     });
 }
 
