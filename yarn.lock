@@ -638,15 +638,15 @@
   resolved "https://registry.npmjs.org/@sindresorhus/fnv1a/-/fnv1a-3.1.0.tgz"
   integrity sha512-KV321z5m/0nuAg83W1dPLy85HpHDk7Sdi4fJbwvacWsEhAh+rZUW4ZfGcXmUIvjZg4ss2bcwNlRhJ7GBEUG08w==
 
-"@topology-foundation/crdt@0.0.22-2":
-  version "0.0.22-2"
-  resolved "https://registry.npmjs.org/@topology-foundation/crdt/-/crdt-0.0.22-2.tgz"
-  integrity sha512-JYLAUHFgx4vIp9LeuCpHzxHJcpu8d3hWJqSj7FEeyxQCPXAQebP/19ril4KpijbEdyc73OcXPTIa2fuWLFDfyw==
+"@topology-foundation/crdt@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@topology-foundation/crdt/-/crdt-0.0.22.tgz#38b44c9b0d40ce242b4916b3861883441a76e7e3"
+  integrity sha512-R7j7/eznrPScWGj47IwrfpiXRAT2bivuMmih2oYOdT8vlTyiQl13eURx42HKj/x2XTKqyLs1gewu52GVpllGpg==
 
-"@topology-foundation/network@0.0.22-2":
-  version "0.0.22-2"
-  resolved "https://registry.npmjs.org/@topology-foundation/network/-/network-0.0.22-2.tgz"
-  integrity sha512-PaXOndQHsmmipAbHI+mN3TfulxjanmxVVyxfgih3qmPRk2dDtEmfa51smIVc7KlI0KXQplQ5tmYv8bJ+3umgsQ==
+"@topology-foundation/network@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@topology-foundation/network/-/network-0.0.22.tgz#0fd2885f40b1f64905aaf98a3f8062e9e43e569d"
+  integrity sha512-+kBS2rmRHljvNWSI7RuWVKm37cGM8c53JgJSYlgXmQcPxr6PNy0lhcUXWU/HT7n8uSw6U5I8OMSDU6bX8+3JyQ==
   dependencies:
     "@chainsafe/libp2p-gossipsub" "^13.1.0"
     "@chainsafe/libp2p-noise" "^15.1.0"
@@ -666,19 +666,20 @@
     it-pipe "^3.0.1"
     libp2p "^1.8.1"
 
-"@topology-foundation/node@0.0.22-2":
-  version "0.0.22-2"
-  resolved "https://registry.yarnpkg.com/@topology-foundation/node/-/node-0.0.22-2.tgz#f4ac181961a822ea52cb2e61354b6776f1594030"
-  integrity sha512-Ppwl/FwNQM5chKs8Q8WkgP9H3FFO8ZFHZwQj5pti+sya6Ed/GxXV+YkRj4SDtl9N6DoKuXkE2JBUxyFFDVQ0sQ==
+"@topology-foundation/node@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@topology-foundation/node/-/node-0.0.22.tgz#9afcef3edd2f096b342428616c89302b912fc553"
+  integrity sha512-+fZGbLb4nH75LY3JRKcNE2viZxFOWcb2gzzyYlprT+DL8fsQp7m5bmr6fdMxbzrhIqLgt6AEHwynzbQpsOPhFA==
   dependencies:
-    "@topology-foundation/crdt" "0.0.22-2"
-    "@topology-foundation/network" "0.0.22-2"
-    "@topology-foundation/object" "0.0.22-2"
+    "@topology-foundation/crdt" "0.0.22"
+    "@topology-foundation/network" "0.0.22"
+    "@topology-foundation/object" "0.0.22"
+    commander "^12.1.0"
 
-"@topology-foundation/object@0.0.22-2":
-  version "0.0.22-2"
-  resolved "https://registry.npmjs.org/@topology-foundation/object/-/object-0.0.22-2.tgz"
-  integrity sha512-CF5IaXeqpAkoGzLZis6AlARLAhTEUG8cwLpYbAoif7Lv0Bepd/uhQ1MXcXTFs0AJ5khjNDhjsm7W02cccLe71Q==
+"@topology-foundation/object@0.0.22":
+  version "0.0.22"
+  resolved "https://registry.yarnpkg.com/@topology-foundation/object/-/object-0.0.22.tgz#f86ddbab711610cedaff2127cdae64e6e360b862"
+  integrity sha512-Jvrev5FrPsYQB72ou1/+rKA/JcVANCbMHw6A2vQSuZ7/isXY2/hk3+Px57Cz6Nj+4SLRArZXuCCcFvwjdUAXFw==
 
 "@tsconfig/node10@^1.0.7":
   version "1.0.11"
@@ -1437,6 +1438,11 @@ commander@^10.0.1:
   version "10.0.1"
   resolved "https://registry.yarnpkg.com/commander/-/commander-10.0.1.tgz#881ee46b4f77d1c1dccc5823433aa39b022cbe06"
   integrity sha512-y4Mg2tXshplEbSGzx7amzPwKKOCGuoSRP/CjEdwwk0FOGlUbq6lKuoyDZTNZkmxHdJtp54hdfY/JUrdL7Xfdug==
+
+commander@^12.1.0:
+  version "12.1.0"
+  resolved "https://registry.yarnpkg.com/commander/-/commander-12.1.0.tgz#01423b36f501259fdaac4d0e4d60c96c991585d3"
+  integrity sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==
 
 commander@^2.20.0:
   version "2.20.3"

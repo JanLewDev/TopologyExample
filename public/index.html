@@ -19,11 +19,19 @@
       <button id="createRoom">Create Room</button>
     </div>
 
-    <div id="chat" style="overflow-y: scroll; height: 600px; width: 100%">
+    <div
+      id="chat"
+      style="
+        overflow-y: scroll;
+        min-height: 200px;
+        max-height: 600px;
+        width: 100%;
+      "
+    >
       <!-- Messages will appear here -->
     </div>
 
-    <div>
+    <div style="margin-bottom: 10px">
       <input id="messageInput" type="text" placeholder="Message" />
       <button id="sendMessage">Send</button>
     </div>

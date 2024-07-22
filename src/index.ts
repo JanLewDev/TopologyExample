@@ -11,7 +11,7 @@ let objectPeers: string[] = [];
 
 const render = () => {
     const element_peerId = <HTMLDivElement>document.getElementById("peerId");
-    element_peerId.innerHTML = node.getPeerId();
+    element_peerId.innerHTML = node.networkNode.peerId;
 
     const element_peers = <HTMLDivElement>document.getElementById("peers");
     element_peers.innerHTML = "[" + peers.join(", ") + "]";
@@ -27,7 +27,7 @@ const render = () => {
     const element_chat = <HTMLDivElement>document.getElementById("chat");
     element_chat.innerHTML = "";
 
-    if(chat.set.length == 0){
+    if(chat.set().size == 0){
         const div = document.createElement("div");
         div.innerHTML = "No messages yet";
         div.style.padding = "10px";
@@ -50,10 +50,10 @@ async function sendMessage(message: string) {
         alert("Please create or join a chat room first");
         return;
     }
-    console.log("Sending message: ", `(${timestamp}, ${message}, ${node.getPeerId()})`);
-    chatCRO.addMessage(timestamp, message, node.getPeerId());
+    console.log("Sending message: ", `(${timestamp}, ${message}, ${node.networkNode.peerId})`);
+    chatCRO.addMessage(timestamp, message, node.networkNode.peerId);
 
-    node.updateObject(chatCRO, `addMessage(${timestamp}, ${message}, ${node.getPeerId()})`);
+    node.updateObject(chatCRO, `addMessage(${timestamp}, ${message}, ${node.networkNode.peerId})`);
     render();
 }
 
@@ -63,15 +63,15 @@ async function main() {
 
     node.addCustomGroupMessageHandler((e) => {
         handleChatMessages(chatCRO, e);
-        peers = node.getPeers();
-        discoveryPeers = node.getPeersPerGroup("topology::discovery");
-        if(chatCRO) objectPeers = node.getPeersPerGroup(chatCRO.getObjectId());
+        peers = node.networkNode.getAllPeers();
+        discoveryPeers = node.networkNode.getGroupPeers("topology::discovery");
+        if(chatCRO) objectPeers = node.networkNode.getGroupPeers(chatCRO.getObjectId());
         render();
     });
 
     let button_create = <HTMLButtonElement>document.getElementById("createRoom");
     button_create.addEventListener("click", () => {
-        chatCRO = new Chat(node.getPeerId());
+        chatCRO = new Chat(node.networkNode.peerId);
         node.createObject(chatCRO);
         (<HTMLButtonElement>document.getElementById("chatId")).innerHTML = chatCRO.getObjectId();
         render();
@@ -91,7 +91,7 @@ async function main() {
 
             let object: any = node.getObject(objectId);
             
-            chatCRO = Object.assign(new Chat(node.getPeerId()), object);
+            chatCRO = Object.assign(new Chat(node.networkNode.peerId), object);
             (<HTMLButtonElement>document.getElementById("chatId")).innerHTML = objectId;
             render();
         } catch (e) {
