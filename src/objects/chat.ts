@@ -28,5 +28,4 @@ export class Chat extends TopologyObject implements IChat {
     merge(other: Chat): void {
         this.chat.merge(other.chat);
     }
-
 }
